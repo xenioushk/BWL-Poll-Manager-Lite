@@ -1,0 +1,14 @@
+
+div.bpm-container-rtl-support{
+    direction: rtl;
+    unicode-bidi: embed;
+    text-align: right;
+    clear: right;
+}
+
+
+
+.bpm-container-rtl-support .bpm-question-container .bpm-poll-options li input[type="radio"] + label:before{
+
+    margin: -3px 7px 0;
+}

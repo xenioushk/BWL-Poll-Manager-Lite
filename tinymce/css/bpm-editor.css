@@ -1,0 +1,132 @@
+/*--- lorem_pixel Shortcode Popup Styling---*/
+
+#bpm_editor_overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    background-color: rgba(0, 0, 0, 0.7);
+    direction: ltr;
+}
+
+#bpm_editor_overlay #bpm_editor_popup {
+    background-color: #fff;
+    width: 500px;
+    min-height: 330px;
+    margin: 300px auto 0px auto;
+    border: 1px solid #222222;
+    position: relative;
+}
+
+#bpm_editor_overlay #bpm_editor_popup img.bpm_sc_load_icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -14px;
+    margin-left: -14px;
+}
+
+#bpm_editor_overlay #bpm_editor_popup h3 {
+    background-color: #222222;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    margin: 0px;
+    position: relative;
+    cursor: move;
+}
+
+.bpm_overflow {
+    overflow-y: scroll;
+    max-height: 525px;
+}
+
+input[type="checkbox"].bpm_checkbox {
+    margin-top: 5px;
+}
+
+#bpm_editor_overlay #bpm_editor_popup span.btn_bpm_editor_close {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: verdana;
+    right: 5px;
+    top: 8px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+#bpm_editor_overlay #bpm_editor_popup #bpm_editor_popup_content {
+    padding: 20px;
+    background: #ffffff;
+}
+
+#bpm_editor_popup_content .row {
+    margin-bottom: 10px;
+}
+
+#bpm_editor_popup_content .row label {
+    display: block;
+    width: 140px;
+    text-align: left;
+    line-height: 25px;
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    clear: both;
+}
+
+#bpm_editor_popup_content .row input[type="text"] {
+    display: block;
+    width: 230px;
+    text-align: left;
+    display: inline-block;
+    border: 1px solid #ccc;
+}
+
+#bpm_editor_popup_content .row select {
+    display: block;
+    width: 245px;
+    text-align: left;
+    display: inline-block;
+    border: 1px solid #ccc;
+}
+
+#bpm_editor_popup_content .row .centered {
+    text-align: center;
+    display: block;
+}
+
+#bpm_editor_popup_content .row .dn {
+    display: none;
+}
+
+#bpm_editor_popup_content #bpm_editor_popup_buttons {
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+}
+
+#bpm_editor_popup_content #bpm_editor_popup_buttons #closeShortCodebtn {
+    float: right;
+}
+
+#bpm_editor_popup_content #bpm_basic_info {
+    margin-top: 12px;
+}
+
+.bpm_poll_info {
+    list-style-type: disclosure-closed;
+    padding-left: 14px;
+    clear: both;
+}
+
+.bpm_poll_info li {
+    line-height: 16px;
+    width: 49%;
+    float: left;
+}
