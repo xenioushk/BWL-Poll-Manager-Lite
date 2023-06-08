@@ -5,7 +5,7 @@ Plugin Name: BWL Poll Manager Lite
 Plugin URI: https://wordpress.org/plugins/bwl-poll-manager-lite
 Description: Poll Manager Lite provides a great option to add a custom voting system anywhere on the site. Easy drag and drop features allow you to create polls within a few minutes, and you can also sort poll options using drag-drop features.
 Author: Md Mahbub Alam Khan
-Version: 1.0.3
+Version: 1.0.4
 WP Requires at least: 5.4+
 Author URI: http://www.bluewindlab.net
 text-domain: bwl-poll
@@ -14,97 +14,118 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.txt
 */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die;
+if (!defined('WPINC')) {
+    die;
 }
 
-if ( ! class_exists( 'BWL_Poll_Manager' ) ) {
+if (!class_exists('BWL_Poll_Manager')) {
 
-    register_activation_hook( __FILE__, array( 'BWL_Poll_Manager' , 'bpm_create_custom_table' ) );
+    register_activation_hook(__FILE__, array('BWL_Poll_Manager', 'bpm_create_custom_table'));
 
-    Class BWL_Poll_Manager{
+    class BWL_Poll_Manager
+    {
 
-        function __construct() {
+        function __construct()
+        {
 
-             /*--- PLUGIN COMMON CONSTANTS ---*/
+            /*--- PLUGIN COMMON CONSTANTS ---*/
 
-            define( "BWL_PM_PLUGIN_TITLE", 'BWL Poll Manager Lite' );
-            define( "BWL_PM_PLUGIN_DIR", plugins_url() .'/bwl-poll-manager-lite/' );
-            define( "BWL_PM_PLUGIN_VERSION", '1.0.3');
+            define("BWL_PM_PLUGIN_TITLE", 'BWL Poll Manager Lite');
+            define("BWL_PM_PLUGIN_DIR", plugins_url() . '/bwl-poll-manager-lite/');
+            define("BWL_PM_PLUGIN_VERSION", '1.0.4');
             $this->register_post_type();
-            $this->taxonomies();    
+            $this->taxonomies();
             // Call Immediatly Initialized.        
             $this->included_files();
-            $this->enqueue_plugin_scripts();       
+            $this->enqueue_plugin_scripts();
 
             // Upgrade data table
             //Since: Version 1.0.4
             $this->bpm_upgrade_db_table();
-            
+
             $this->bpm_flash_rules(); // Added in version 1.0.4
 
+            // Edit plugin metalinks
+            add_filter('plugin_row_meta', array($this, 'bpm_metalinks'), null, 2);
         }
 
-         function bpm_flash_rules() {
-             
+        public function bpm_metalinks($links, $file)
+        {
+
+            if (empty(get_option('bpm_lite_install_date'))) {
+                add_option('bpm_lite_install_date', date('Y-m-d H:i:s'));
+            }
+
+            if (strpos($file, 'bwl-poll-manager-lite.php') !== false && is_plugin_active($file)) {
+
+                $new_links = array(
+                    '<a href="' . esc_url('https://xenioushk.github.io/docs-wp-plugins/bpm/index.html') . '" target="_blank">' . __('Documentation', 'bwl-poll') . '</a>',
+                    '<a href="' . esc_url('https://1.envato.market/bpm-wp') . '" target="_blank" style="color:green; font-weight: bold;">' . __('Get Pro Version', 'bwl-poll') . '</a>'
+                );
+
+                $links = array_merge($links, $new_links);
+            }
+
+            return $links;
+        }
+
+        function bpm_flash_rules()
+        {
+
             $bpm_data = get_option('bwl_poll_options');
-            
+
             $bpm_flash_rules_status = get_option('bpm_flash_rules_status');
 
-            if( $bpm_flash_rules_status != 1 ) {
-                
-                flush_rewrite_rules();
-                update_option('bpm_flash_rules_status', 1 );
+            if ($bpm_flash_rules_status != 1) {
 
+                flush_rewrite_rules();
+                update_option('bpm_flash_rules_status', 1);
             }
-            
+
             // Matching Old Slug & New Slug Value.
             // First we get data from plugin option panel.
-            
-            $bpm_custom_slug = "bwl-poll"; 
 
-            if( isset($bpm_data['bpm_custom_slug']) && $bpm_data['bpm_custom_slug'] != "" ) {
+            $bpm_custom_slug = "bwl-poll";
 
-                $bpm_custom_slug = trim( $bpm_data['bpm_custom_slug'] );
+            if (isset($bpm_data['bpm_custom_slug']) && $bpm_data['bpm_custom_slug'] != "") {
 
+                $bpm_custom_slug = trim($bpm_data['bpm_custom_slug']);
             }
-            
+
             // 
-            
+
             $bpm_old_custom_slug = get_option('bpm_old_custom_slug');
 
-            if( $bpm_old_custom_slug == "" ) {
-                
-                update_option('bpm_old_custom_slug', $bpm_custom_slug );
+            if ($bpm_old_custom_slug == "") {
 
+                update_option('bpm_old_custom_slug', $bpm_custom_slug);
             }
-            
-            
-            if ( $bpm_custom_slug != $bpm_old_custom_slug ) {
-                
+
+
+            if ($bpm_custom_slug != $bpm_old_custom_slug) {
+
                 flush_rewrite_rules();
-                update_option('bpm_old_custom_slug', $bpm_custom_slug );
-                
+                update_option('bpm_old_custom_slug', $bpm_custom_slug);
             }
-            
         }
-        
-        function included_files() {
 
-            include_once dirname(__FILE__) . '/includes/bpm-filters.php';       
-            include_once dirname(__FILE__) . '/includes/bpm-helper-functions.php';       
-            include_once dirname(__FILE__) . '/shortcode/bpm-shortcodes.php';       
-            include_once dirname(__FILE__) . '/includes/bpm-vote-counter.php';  
-            include_once dirname(__FILE__) . '/includes/bpm-custom-google-font.php';  
-            include_once dirname(__FILE__) . '/includes/bpm-single-page.php';  
+        function included_files()
+        {
 
-            if( ! is_admin() ) {
+            include_once dirname(__FILE__) . '/includes/bpm-filters.php';
+            include_once dirname(__FILE__) . '/includes/bpm-helper-functions.php';
+            include_once dirname(__FILE__) . '/shortcode/bpm-shortcodes.php';
+            include_once dirname(__FILE__) . '/includes/bpm-vote-counter.php';
+            include_once dirname(__FILE__) . '/includes/bpm-custom-google-font.php';
+            include_once dirname(__FILE__) . '/includes/bpm-single-page.php';
+
+            if (!is_admin()) {
 
                 include_once dirname(__FILE__) . '/includes/bpm-custom-theme.php';  // Intriduced in version 1.0.3
 
             }
 
-            if( is_admin() ) {
+            if (is_admin()) {
 
                 include_once dirname(__FILE__) . '/includes/bpm-cmb-framework/bpm_cmb_fields.php';
                 include_once dirname(__FILE__) . '/includes/bpm-custom-column.php';
@@ -112,36 +133,35 @@ if ( ! class_exists( 'BWL_Poll_Manager' ) ) {
                 include_once dirname(__FILE__) . '/includes/bpm-quick-edit.php';
 
                 include_once dirname(__FILE__) . '/option-panel/bpm-admin-settings.php';
-
             }
-
         }
 
         //@Upgrade Database Tabel.
         //@Introduced in version: 1.1.0
 
-        function bpm_upgrade_db_table() {
+        function bpm_upgrade_db_table()
+        {
 
             global $wpdb;
 
             $bpm_voting_data_table = $wpdb->prefix . "bpm_vote_data";
 
-            if($wpdb->get_var("SHOW TABLES LIKE '$bpm_voting_data_table'") != $bpm_voting_data_table) {
+            if ($wpdb->get_var("SHOW TABLES LIKE '$bpm_voting_data_table'") != $bpm_voting_data_table) {
                 $this->bpm_create_custom_table();
             }
-
         }
 
         //@Custom Table For Count Votes.
         //@Introduced in version: 1.0.4
 
-        public static function bpm_create_custom_table() {
+        public static function bpm_create_custom_table()
+        {
 
-                global $wpdb;
+            global $wpdb;
 
-                $bpm_voting_data_table = $wpdb->prefix . "bpm_vote_data"; // for deatils. each day info.
+            $bpm_voting_data_table = $wpdb->prefix . "bpm_vote_data"; // for deatils. each day info.
 
-                $sql = "CREATE TABLE $bpm_voting_data_table (
+            $sql = "CREATE TABLE $bpm_voting_data_table (
                                 ID int(11) NOT NULL AUTO_INCREMENT,
                                 postid bigint(20) NOT NULL,
                                 opt_id bigint(20) NOT NULL,
@@ -152,20 +172,20 @@ if ( ! class_exists( 'BWL_Poll_Manager' ) ) {
                                 PRIMARY KEY  (ID)
                         )";
 
-                require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-                dbDelta($sql);
-
+            require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+            dbDelta($sql);
         }
 
-        function enqueue_plugin_scripts(){
+        function enqueue_plugin_scripts()
+        {
 
             $bwl_pm_data = get_option('bwl_poll_options');
 
-            if ( ! is_admin()) {
+            if (!is_admin()) {
 
                 bpm_enqueue_google_fonts();
 
-                if( ! isset( $pvm_data['bpm_fontawesome_status'] ) || $pvm_data['bpm_fontawesome_status'] == 1 ) {
+                if (!isset($pvm_data['bpm_fontawesome_status']) || $pvm_data['bpm_fontawesome_status'] == 1) {
                     wp_enqueue_style('bpm-font-awesome', plugins_url('css/font-awesome.min.css', __FILE__));
                 }
 
@@ -181,37 +201,34 @@ if ( ! class_exists( 'BWL_Poll_Manager' ) ) {
                 wp_enqueue_style('bpm-rtl-support');
 
                 // Register Scripts.
-                wp_register_script( 'bpm-custom-script', plugins_url( 'js/custom-scripts.js' , __FILE__ ) , array( 'jquery'), '', FALSE );
-
+                wp_register_script('bpm-custom-script', plugins_url('js/custom-scripts.js', __FILE__), array('jquery'), '', FALSE);
             }
 
-            if ( is_admin() ) {
+            if (is_admin()) {
 
                 // shortcode            
                 wp_enqueue_style('bwl-poll-shortcode-editor-style', plugins_url('tinymce/css/bpm-editor.css', __FILE__));
-                wp_register_script( 'bpm-admin-custom-scripts', plugins_url( 'js/bpm-admin-custom-scripts.js' , __FILE__ ) , array( 'jquery',  'jquery-ui-core','jquery-ui-datepicker', 'jquery-ui-draggable', 'jquery-ui-droppable'), '', TRUE );
-                wp_enqueue_script( 'bpm-admin-custom-scripts' );
-
+                wp_register_script('bpm-admin-custom-scripts', plugins_url('js/bpm-admin-custom-scripts.js', __FILE__), array('jquery',  'jquery-ui-core', 'jquery-ui-datepicker', 'jquery-ui-draggable', 'jquery-ui-droppable'), '', TRUE);
+                wp_enqueue_script('bpm-admin-custom-scripts');
             }
-
         }
 
         /*--- Define Custom Post Type  ---*/
 
-        public function register_post_type() {
+        public function register_post_type()
+        {
 
             /*
              * Custom Slug Section.
-             */        
+             */
 
             $bpm_options = get_option('bwl_poll_options');
 
             $bpm_custom_slug = "bwl-poll";
 
-            if( isset($bpm_options['bpm_custom_slug']) && $bpm_options['bpm_custom_slug'] != "" ) {
+            if (isset($bpm_options['bpm_custom_slug']) && $bpm_options['bpm_custom_slug'] != "") {
 
-                $bpm_custom_slug = trim( $bpm_options['bpm_custom_slug'] );
-
+                $bpm_custom_slug = trim($bpm_options['bpm_custom_slug']);
             }
 
             $labels = array(
@@ -233,14 +250,14 @@ if ( ! class_exists( 'BWL_Poll_Manager' ) ) {
 
             $args = array(
                 'labels'                       => $labels,
-                'query_var'                => 'bwl_polls',    
+                'query_var'                => 'bwl_polls',
                 'show_in_nav_menus' => true,
-                'public'                       => true,        
+                'public'                       => true,
                 'show_ui'                   => true,
                 'show_in_menu'         => true,
                 'rewrite'                     => array(
-                                                     'slug' => $bpm_custom_slug
-                                                    ),
+                    'slug' => $bpm_custom_slug
+                ),
                 'publicly_queryable'     => true,
                 'capability_type'          => 'post',
                 'has_archive'              => true,
@@ -248,50 +265,49 @@ if ( ! class_exists( 'BWL_Poll_Manager' ) ) {
                 'show_in_admin_bar'  => true,
                 'supports'                   => array('title'),
                 'menu_icon'                => BWL_PM_PLUGIN_DIR . 'images/bwl_poll_menu_icon.png'
-            );        
+            );
 
 
             register_post_type('bwl_poll', $args); // text domian limitations :D
 
         }
 
-        public function taxonomies() {
+        public function taxonomies()
+        {
 
             /*
              * Custom Slug Section.
-             */        
+             */
 
             $bpm_options = get_option('bpm_options');
 
 
             $bpm_custom_slug = "bwl-poll";
 
-            if( isset($bpm_options['bpm_custom_slug']) && $bpm_options['bpm_custom_slug'] != "" ) {
+            if (isset($bpm_options['bpm_custom_slug']) && $bpm_options['bpm_custom_slug'] != "") {
 
-                $bpm_custom_slug = trim( $bpm_options['bpm_custom_slug'] );
-
+                $bpm_custom_slug = trim($bpm_options['bpm_custom_slug']);
             }
 
-            $taxonomies = array();  
+            $taxonomies = array();
 
             $this->register_all_taxonomies($taxonomies);
-
         }
 
 
-        function register_all_taxonomies($taxonomies) {
+        function register_all_taxonomies($taxonomies)
+        {
 
-            foreach ($taxonomies as $name=> $arr) {
+            foreach ($taxonomies as $name => $arr) {
                 register_taxonomy($name, array('bwl_poll'), $arr);
             }
-
         }
-
     }
 
     /*--- Initialization ---*/
 
-    function init_bwl_poll_manager() {
+    function init_bwl_poll_manager()
+    {
         new BWL_Poll_Manager();
     }
 
@@ -300,5 +316,4 @@ if ( ! class_exists( 'BWL_Poll_Manager' ) ) {
     /*---  TRANSLATION FILE ---*/
 
     load_plugin_textdomain('bwl-poll', FALSE, dirname(plugin_basename(__FILE__)) . '/lang/');
-
- }
+}

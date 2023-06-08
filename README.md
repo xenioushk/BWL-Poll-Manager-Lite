@@ -2,8 +2,8 @@
 Contributors: xenioushk
 Tags: poll, vote, option, opinion
 Requires at least: 5.4
-Tested up to: 6.0
-Stable tag: 1.0.3
+Tested up to: 6.2.2
+Stable tag: 1.0.4
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -11,7 +11,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 BWL Poll Manager Lite provides all the required features to create a custom poll panel with unlimited options with in few minutes.
 
 == Description ==
-[Live Demo](https://projects.bluewindlab.net/wpplugin/bpm/) | [User Guide](https://projects.bluewindlab.net/wpplugin/bpm/doc/) | [Pro Version](https://1.envato.market/bpm-wp) 
+[Live Demo](https://projects.bluewindlab.net/wpplugin/bpm/) | [User Guide](https://projects.bluewindlab.net/wpplugin/bpm/doc/) | [Pro Version](https://1.envato.market/bpm-wp)
 
 <p>BWL Poll Manager provides you with a great way to create a complete custom poll system for your WordPress-powered website. You can easily create unlimited numbers of custom polls with endless options and then use them via Shortcode anywhere on your website, like pages, posts, or inside custom posts. Check the plugin features.</p>
 
@@ -44,7 +44,6 @@ BWL Poll Manager Lite provides all the required features to create a custom poll
     <li>- Well Documentation.</li>
 </ul>
 
-
 <p><a href="https://1.envato.market/bpm-wp" rel="nofollow">Get The Pro Version</a></p>
 
 == Installation ==
@@ -67,24 +66,45 @@ BWL Poll Manager Lite provides all the required features to create a custom poll
 
 Yes, you can. Using quick edit method, you can easily reset total number of votes.
 
-
 == Changelog ==
 
+= 1.0.4 =
+
+- Improved plugin code for WordPress Latest Version.
+
 = 1.0.3 =
-* Improved plugin code for WordPress Latest Version.
+
+- Improved plugin code for WordPress Latest Version.
 
 = 1.0.2 =
-* Improved plugin code for WordPress Latest Version.
+
+- Improved plugin code for WordPress Latest Version.
 
 = 1.0.1 =
-* Improved plugin performance.
-* Improved plugin Shortcode Editor.
-= 1.0.0 =
-* First release.
+
+- Improved plugin performance.
+- Improved plugin Shortcode Editor.
+  = 1.0.0 =
+- First release.
 
 == Upgrade Notice ==
 
+= 1.0.4 =
+
+- Replace all files and directories in your plugins/bwl-poll-manager-lite folder.
+
+= 1.0.3 =
+
+- Replace all files and directories in your plugins/bwl-poll-manager-lite folder.
+
+= 1.0.2 =
+
+- Replace all files and directories in your plugins/bwl-poll-manager-lite folder.
+
 = 1.0.1 =
-* Replace all files and directories in your plugins/bwl-poll-manager-lite folder.
+
+- Replace all files and directories in your plugins/bwl-poll-manager-lite folder.
+
 = 1.0.0 =
-* First release.
+
+- First release.
