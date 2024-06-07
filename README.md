@@ -1,10 +1,10 @@
 === BWL Poll Manager Lite ===
 Contributors: xenioushk
-Tags: poll, vote, option, opinion
+Tags: poll,vote,option,opinion
 Requires at least: 5.4
-Tested up to: 6.2.2
-Stable tag: 1.0.4
-Requires PHP: 5.4
+Tested up to: 6.5
+Stable tag: 1.0.6
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -67,6 +67,10 @@ BWL Poll Manager Lite provides all the required features to create a custom poll
 Yes, you can. Using quick edit method, you can easily reset total number of votes.
 
 == Changelog ==
+
+= 1.0.5 =
+
+- Improved plugin code for WordPress Latest Version.
 
 = 1.0.4 =
 
