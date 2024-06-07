@@ -5,7 +5,7 @@ Plugin Name: BWL Poll Manager Lite
 Plugin URI: https://wordpress.org/plugins/bwl-poll-manager-lite
 Description: Poll Manager Lite provides a great option to add a custom voting system anywhere on the site. Easy drag and drop features allow you to create polls within a few minutes, and you can also sort poll options using drag-drop features.
 Author: Md Mahbub Alam Khan
-Version: 1.0.4
+Version: 1.0.6
 WP Requires at least: 5.4+
 Author URI: http://www.bluewindlab.net
 text-domain: bwl-poll
@@ -32,7 +32,7 @@ if (!class_exists('BWL_Poll_Manager')) {
 
             define("BWL_PM_PLUGIN_TITLE", 'BWL Poll Manager Lite');
             define("BWL_PM_PLUGIN_DIR", plugins_url() . '/bwl-poll-manager-lite/');
-            define("BWL_PM_PLUGIN_VERSION", '1.0.4');
+            define("BWL_PM_PLUGIN_VERSION", '1.0.6');
             $this->register_post_type();
             $this->taxonomies();
             // Call Immediatly Initialized.        

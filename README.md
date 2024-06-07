@@ -1,33 +1,42 @@
-=== BWL Poll Manager Lite ===
+**BWL Poll Manager Lite**
+
 Contributors: xenioushk
-Tags: poll, vote, option, opinion
+
+Tags: poll,vote,option,opinion
+
 Requires at least: 5.4
-Tested up to: 6.2.2
-Stable tag: 1.0.4
-Requires PHP: 5.4
+
+Tested up to: 6.5
+
+Stable tag: 1.0.6
+
+Requires PHP: 7.4
+
 License: GPLv2 or later
+
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-BWL Poll Manager Lite provides all the required features to create a custom poll panel with unlimited options with in few minutes.
+<p>
+BWL Poll Manager Lite provides all the required features to create a custom poll panel with unlimited options with in few minutes.</p>
 
-== Description ==
+**Plugin Description**
 [Live Demo](https://projects.bluewindlab.net/wpplugin/bpm/) | [User Guide](https://projects.bluewindlab.net/wpplugin/bpm/doc/) | [Pro Version](https://1.envato.market/bpm-wp)
 
 <p>BWL Poll Manager provides you with a great way to create a complete custom poll system for your WordPress-powered website. You can easily create unlimited numbers of custom polls with endless options and then use them via Shortcode anywhere on your website, like pages, posts, or inside custom posts. Check the plugin features.</p>
 
 <ul>
-    <li>- Create Polls With Unlimited Options.</li>
-    <li>- Single and multiple answer options.</li>
-    <li>- Drag & Drop Options Sorting.</li>
-    <li>- Custom Build Shortcode Editor.</li>
-    <li>- 3 Predefined Poll Result Bar.</li>
-    <li>- Color Customization.</li>
-    <li>- One Click Poll Reset Option.</li>
-    <li>- One Vote From One IP Address.</li>
-    <li>- RTL support.</li>
-    <li>- Responsive Layout.</li>
-    <li>- Ready for localization.</li>
-    <li>- Support WP Latest Version.</li>
+    <li>Create Polls With Unlimited Options.</li>
+    <li>Single and multiple answer options.</li>
+    <li>Drag & Drop Options Sorting.</li>
+    <li>Custom Build Shortcode Editor.</li>
+    <li>3 Predefined Poll Result Bar.</li>
+    <li>Color Customization.</li>
+    <li>One Click Poll Reset Option.</li>
+    <li>One Vote From One IP Address.</li>
+    <li>RTL support.</li>
+    <li>Responsive Layout.</li>
+    <li>Ready for localization.</li>
+    <li>Support WP Latest Version.</li>
 </ul>
 
 <h3>Pro Version Additional Features</h3>
@@ -67,6 +76,10 @@ BWL Poll Manager Lite provides all the required features to create a custom poll
 Yes, you can. Using quick edit method, you can easily reset total number of votes.
 
 == Changelog ==
+
+= 1.0.5 =
+
+- Improved plugin code for WordPress Latest Version.
 
 = 1.0.4 =
 
